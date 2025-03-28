@@ -27,12 +27,6 @@ export default function Basic() {
         }}
       />
       <Image style={styles.image} source={require("../../assets/images/icon.png")} />
-      <Image style={styles.image} source={require("../../assets/images/icon.png")} />
-      <Image style={styles.image} source={require("../../assets/images/icon.png")} />
-      <Image style={styles.image} source={require("../../assets/images/icon.png")} />
-      <Image style={styles.image} source={require("../../assets/images/icon.png")} />
-      <Image style={styles.image} source={require("../../assets/images/icon.png")} />
-      <Image style={styles.image} source={require("../../assets/images/icon.png")} />
       {/* image component */}
 
       {/* button component */}

@@ -24,7 +24,9 @@ function App(): React.JSX.Element {
    */
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}
+      nestedScrollEnabled={true}
+      >
       <Basic />
       <TextInputComponent />
       <ScrollViewComponent/>
