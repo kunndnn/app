@@ -5,49 +5,77 @@
  * @format
  */
 
-import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-
-import Basic from './src/components/Basic';
-import TextInputComponent from './src/components/TextInputComponent';
-import ScrollViewComponent from './src/components/ScrollViewComponent';
-import Styling from './src/components/Styling';
-import FlexLayout from './src/components/FlexLayout';
-import TouchableComponents from './src/components/Touchable';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import TodoInput from './src/components/TodoInput';
+import {Todo} from './src/components/Types';
+import TodoList from './src/components/TodoList';
 
 function App(): React.JSX.Element {
-  /*
-   * To keep the template simple and small we're adding padding to prevent view
-   * from rendering under the System UI.
-   * For bigger apps the reccomendation is to use `react-native-safe-area-context`:
-   * https://github.com/AppAndFlow/react-native-safe-area-context
-   *
-   * You can read more about it here:
-   * https://github.com/react-native-community/discussions-and-proposals/discussions/827
-   */
+  const [todoList, setTodoList] = useState<Todo[]>([]);
+
+  const addTodo = (text: string) => {
+    console.log('====================================');
+    console.log({text});
+    console.log('====================================');
+    setTodoList([
+      ...todoList,
+      {
+        id: Date.now().toString(),
+        text,
+        completed: false,
+      },
+    ]);
+  };
+  console.log('====================================');
+  console.log({todoList});
+  console.log('====================================');
+
+  const deleteTodo = (id: string) => {
+    setTodoList(todoList.filter(todo => todo.id !== id));
+  };
+
+  const editTodo = (id: string, newText: string) => {
+
+  };
+
+  const toggleTodo = (id: string) => {
+    setTodoList(
+      todoList.map(item =>
+        item.id === id
+          ? {
+              ...item,
+              completed: !item.completed,
+            }
+          : item,
+      ),
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollViewContent}
-        nestedScrollEnabled={true}
-        bouncesZoom={true}>
-        <Basic />
-        <TextInputComponent />
-        <ScrollViewComponent />
-        <Styling />
-        <FlexLayout />
-        <TouchableComponents />
-      </ScrollView>
+      <Text style={styles.headerText}>Todo App</Text>
+      <TodoInput onAddTodo={addTodo} />
+      <TodoList
+        onToggleTodo={toggleTodo}
+        onDeleteTodo={deleteTodo}
+        onEditTodo={editTodo}
+        todoList={todoList}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
-  },
-  scrollViewContent: {
+    flex: 1,
     padding: 20,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
   },
 });
 
