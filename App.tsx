@@ -11,6 +11,9 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import Basic from './src/components/Basic';
 import TextInputComponent from './src/components/TextInputComponent';
 import ScrollViewComponent from './src/components/ScrollViewComponent';
+import Styling from './src/components/Styling';
+import FlexLayout from './src/components/FlexLayout';
+import TouchableComponents from './src/components/Touchable';
 
 function App(): React.JSX.Element {
   /*
@@ -24,13 +27,17 @@ function App(): React.JSX.Element {
    */
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollViewContent}
-      nestedScrollEnabled={true}
-      >
-      <Basic />
-      <TextInputComponent />
-      <ScrollViewComponent/>
-    </ScrollView>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        nestedScrollEnabled={true}
+        bouncesZoom={true}>
+        <Basic />
+        <TextInputComponent />
+        <ScrollViewComponent />
+        <Styling />
+        <FlexLayout />
+        <TouchableComponents />
+      </ScrollView>
     </View>
   );
 }
