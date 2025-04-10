@@ -17,9 +17,13 @@ const TodoItem: React.FC<TodoItemProps> = ({
   onEdit,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const handleEdit = () => {
-    
+
+  const handleEdit = (newText: string) => {
+    console.log({newText});
+    onEdit(newText);
+    setIsEditing(false);
   };
+
   if (isEditing) {
     return (
       <TodoEdit
@@ -29,6 +33,11 @@ const TodoItem: React.FC<TodoItemProps> = ({
       />
     );
   }
+
+  const setEditingTrue = () => {
+    if (!todo.completed) setIsEditing(true);
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onToggle} style={styles.todoText}>
@@ -36,13 +45,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
           {todo.text}
         </Text>
       </TouchableOpacity>
+
       <View style={styles.btnContainer}>
         <TouchableOpacity
-          style={styles.editBtn}
-          // onPress={}
-          onPress={() => setIsEditing(true)}>
+          style={todo.completed ? styles.disableBtn : styles.editBtn}
+          onPress={setEditingTrue}>
           <Text style={styles.btnText}>Edit</Text>
         </TouchableOpacity>
+
         <TouchableOpacity onPress={onDelete} style={styles.delBtn}>
           <Text style={styles.btnText}>Delete</Text>
         </TouchableOpacity>
@@ -75,6 +85,13 @@ const styles = StyleSheet.create({
   },
   editBtn: {
     backgroundColor: '#007aff',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+    marginRight: 5,
+  },
+  disableBtn: {
+    backgroundColor: '#964B00',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,

@@ -13,11 +13,7 @@ import TodoList from './src/components/TodoList';
 
 function App(): React.JSX.Element {
   const [todoList, setTodoList] = useState<Todo[]>([]);
-
   const addTodo = (text: string) => {
-    console.log('====================================');
-    console.log({text});
-    console.log('====================================');
     setTodoList([
       ...todoList,
       {
@@ -27,19 +23,15 @@ function App(): React.JSX.Element {
       },
     ]);
   };
-  console.log('====================================');
-  console.log({todoList});
-  console.log('====================================');
-
-  const deleteTodo = (id: string) => {
+  const deleteTodo = (id: string) =>
     setTodoList(todoList.filter(todo => todo.id !== id));
-  };
 
-  const editTodo = (id: string, newText: string) => {
+  const editTodo = (id: string, newText: string) =>
+    setTodoList(
+      todoList.map(item => (item.id === id ? {...item, text: newText} : item)),
+    );
 
-  };
-
-  const toggleTodo = (id: string) => {
+  const toggleTodo = (id: string) =>
     setTodoList(
       todoList.map(item =>
         item.id === id
@@ -50,7 +42,6 @@ function App(): React.JSX.Element {
           : item,
       ),
     );
-  };
 
   return (
     <View style={styles.container}>

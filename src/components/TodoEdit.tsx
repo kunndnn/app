@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import {Todo} from './Types';
-import React from 'react';
+import {useState} from 'react';
 
 interface TodoEditProps {
   todo: Todo;
@@ -15,14 +15,22 @@ interface TodoEditProps {
 }
 
 const TodoEdit: React.FC<TodoEditProps> = ({todo, onSave, onCancel}) => {
+  const [text, setText] = useState(todo?.text);
+
+  const handleSave = () => {
+    if (text.trim()) {
+      onSave(text.trim());
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} />
+      <TextInput value={text} onChangeText={setText} style={styles.input} />
       <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.saveBtn}>
+        <TouchableOpacity style={styles.saveBtn} onPress={handleSave}>
           <Text style={styles.btnText}>Save</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.cancelBtn}>
+        <TouchableOpacity style={styles.cancelBtn} onPress={onCancel}>
           <Text style={styles.btnText}>cancel</Text>
         </TouchableOpacity>
       </View>

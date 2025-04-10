@@ -96,3 +96,39 @@ To learn more about React Native, take a look at the following resources:
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 # app
+
+<h2>📦 How to Build a Standalone APK in React Native</h2>
+
+<ol>
+  <li>
+    <strong>Generate a Release APK</strong><br/>
+    Run the following in your project root:
+    <pre><code>cd android
+./gradlew assembleRelease</code></pre>
+    This will automatically bundle the JS for release.
+  </li>
+
+  <li>
+    <strong>Locate the APK</strong><br/>
+    The output APK will be located at:<br/>
+    <code>android/app/build/outputs/apk/release/app-release.apk</code>
+  </li>
+
+  <li>
+    <strong>Install APK to Device</strong><br/>
+    Use ADB to install the APK:
+    <pre><code>adb install app/build/outputs/apk/release/app-release.apk</code></pre>
+    Or copy to your phone and install manually.
+  </li>
+
+  <li>
+    <strong>Run Offline</strong><br/>
+    This APK includes the JavaScript bundle and works without connecting to Metro or your dev system.
+  </li>
+</ol>
+
+<h3>🧠 Notes</h3>
+<ul>
+  <li>Don’t use <code>assembleDebug</code> for production or offline testing — it depends on Metro.</li>
+  <li>Make sure Hermes and Flipper are configured properly for release mode.</li>
+</ul>
