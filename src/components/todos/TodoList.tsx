@@ -1,7 +1,7 @@
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import React from 'react';
 import {Todo} from './Types';
-import TodoItem from './TodoItem';
+import TodoItem from '../todos/TodoItem';
 
 interface TodoListProps {
   todoList: Todo[];

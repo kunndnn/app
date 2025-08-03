@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {Todo} from './Types';
-import TodoEdit from './TodoEdit';
+import TodoEdit from '../todos/TodoEdit';
 
 interface TodoItemProps {
   todo: Todo;

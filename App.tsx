@@ -5,69 +5,16 @@
  * @format
  */
 
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import TodoInput from './src/components/TodoInput';
-import {Todo} from './src/components/Types';
-import TodoList from './src/components/TodoList';
+import {Todos} from './src/modules/Todos';
 
 function App(): React.JSX.Element {
-  const [todoList, setTodoList] = useState<Todo[]>([]);
-  const addTodo = (text: string) => {
-    setTodoList([
-      ...todoList,
-      {
-        id: Date.now().toString(),
-        text,
-        completed: false,
-      },
-    ]);
-  };
-  const deleteTodo = (id: string) =>
-    setTodoList(todoList.filter(todo => todo.id !== id));
-
-  const editTodo = (id: string, newText: string) =>
-    setTodoList(
-      todoList.map(item => (item.id === id ? {...item, text: newText} : item)),
-    );
-
-  const toggleTodo = (id: string) =>
-    setTodoList(
-      todoList.map(item =>
-        item.id === id
-          ? {
-              ...item,
-              completed: !item.completed,
-            }
-          : item,
-      ),
-    );
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerText}>Todo App</Text>
-      <TodoInput onAddTodo={addTodo} />
-      <TodoList
-        onToggleTodo={toggleTodo}
-        onDeleteTodo={deleteTodo}
-        onEditTodo={editTodo}
-        todoList={todoList}
-      />
-    </View>
+    <>
+      <Todos />
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-});
+
 
 export default App;
