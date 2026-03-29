@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, View, Button, Alert, Switch } from "react-native";
+import { Text, View, Button, Alert, Switch, ScrollView } from "react-native";
 
 export default function Index() {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -9,10 +9,14 @@ export default function Index() {
     Alert.alert("Button clicked.");
   };
   return (
-    <View>
-      <Text style={{ fontSize: 24 }}>Hello world screen.</Text>
-      <Button title="click me" onPress={pressMe} />
-      <Switch onValueChange={toggleSwitch} value={isEnabled}/>
-    </View>
+    <ScrollView>
+      {[...Array(60)].map((_, i) => (
+        <Text key={i} style={{ fontSize: 24 }}>
+          Hello world screen. {i + 1}
+        </Text>
+      ))}
+      {/* <Button title="click me" onPress={pressMe} />
+      <Switch onValueChange={toggleSwitch} value={isEnabled}/> */}
+    </ScrollView>
   );
 }
